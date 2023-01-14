@@ -43,12 +43,6 @@ public class GildedRose {
         }
     }
 
-    public void ragnarosTick(){
-    }
-
-    public void conjuredTick(){
-    }
-
     public void backstageTick(){
         if (quality < 50) {
             quality += 1;
@@ -68,6 +62,30 @@ public class GildedRose {
             quality = quality - quality;
         }
     }
+
+    public void ragnarosTick(){}
+    
+    public void conjuredTick(){
+        
+        
+        // normal case quality down 2//
+        // if days remaining 1 down 1
+        // if days remai.. 0 and negative down 4
+        // if days remaining 0 and quality 0 no down
+        
+        if(daysRemaining <= 0 ){
+            quality -=4;
+        }else{
+            quality -=2;            
+        }
+        
+        if(quality < 0){
+            quality = 0;
+        }
+        daysRemaining -=1;
+        
+    }
+    
 
     public void tick() {
 
