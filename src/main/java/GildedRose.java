@@ -22,9 +22,7 @@ public class GildedRose {
 
         if (daysRemaining < 0) {
             if (quality > 0) {
-                if (!StringUtils.equals(name, "Sulfuras, Hand of Ragnaros")) {
-                    quality -= 1;
-                }
+                quality -= 1;
             }
         }
     }
@@ -39,14 +37,36 @@ public class GildedRose {
         if (daysRemaining < 0) {
             
             if (quality < 50) {
-                    quality += 1;
+                quality += 1;
             }
         
         }
     }
 
     public void ragnarosTick(){
+    }
 
+    public void conjuredTick(){
+    }
+
+    public void backstageTick(){
+        if (quality < 50) {
+            quality += 1;
+            if (StringUtils.equals(name, "Backstage passes to a TAFKAL80ETC concert")) {
+                if (daysRemaining < 11 && quality < 50) {
+                        quality += 1;
+                }
+                if (daysRemaining < 6 && quality < 50) {
+                        quality += 1;
+                }
+            }
+        }
+
+        daysRemaining -= 1;
+
+        if (daysRemaining < 0) {
+            quality = quality - quality;
+        }
     }
 
     public void tick() {
@@ -62,51 +82,14 @@ public class GildedRose {
         else if(StringUtils.equals(name, "Sulfuras, Hand of Ragnaros")){
             ragnarosTick();
             return;
-
         }
-        if (!StringUtils.equals(name, "Aged Brie")
-                && !StringUtils.equals(name, "Backstage passes to a TAFKAL80ETC concert")) {
-            if (quality > 0) {
-                if (!StringUtils.equals(name, "Sulfuras, Hand of Ragnaros")) {
-                    quality -= 1;
-                }
-            }
-        } else {
-            if (quality < 50) {
-                quality += 1;
-                if (StringUtils.equals(name, "Backstage passes to a TAFKAL80ETC concert")) {
-                    if (daysRemaining < 11) {
-                        if (quality < 50) {
-                            quality += 1;
-                        }
-                    }
-                    if (daysRemaining < 6) {
-                        if (quality < 50) {
-                            quality += 1;
-                        }
-                    }
-                }
-            }
+        else if(StringUtils.equals(name, "Backstage passes to a TAFKAL80ETC concert")){
+            backstageTick();
+            return;
         }
-        if (!StringUtils.equals(name, "Sulfuras, Hand of Ragnaros")) {
-            daysRemaining -= 1;
-        }
-        if (daysRemaining < 0) {
-            if (!StringUtils.equals(name, "Aged Brie")) {
-                if (!StringUtils.equals(name, "Backstage passes to a TAFKAL80ETC concert")) {
-                    if (quality > 0) {
-                        if (!StringUtils.equals(name, "Sulfuras, Hand of Ragnaros")) {
-                            quality -= 1;
-                        }
-                    }
-                } else {
-                    quality = quality - quality;
-                }
-            } else {
-                if (quality < 50) {
-                    quality += 1;
-                }
-            }
+        else if(StringUtils.equals(name, "Conjured Item")){
+            conjuredTick();
+            return;
         }
     }
 }
