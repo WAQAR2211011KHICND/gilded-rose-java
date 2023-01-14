@@ -29,12 +29,40 @@ public class GildedRose {
         }
     }
 
-    // public void 
+    public void brieTick(){
+        if (quality < 50) {
+            quality += 1;
+        }
+
+        daysRemaining -= 1;
+
+        if (daysRemaining < 0) {
+            
+            if (quality < 50) {
+                    quality += 1;
+            }
+        
+        }
+    }
+
+    public void ragnarosTick(){
+
+    }
 
     public void tick() {
+
         if(StringUtils.equals(name, "normal")){
             normalTick();
             return;
+        }
+        else if(StringUtils.equals(name, "Aged Brie")){
+            brieTick();
+            return;
+        }
+        else if(StringUtils.equals(name, "Sulfuras, Hand of Ragnaros")){
+            ragnarosTick();
+            return;
+
         }
         if (!StringUtils.equals(name, "Aged Brie")
                 && !StringUtils.equals(name, "Backstage passes to a TAFKAL80ETC concert")) {
