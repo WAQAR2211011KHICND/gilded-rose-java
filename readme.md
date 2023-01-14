@@ -1,3 +1,5 @@
+# Muhammad Waqar & Hasan Haider
+
 # Gilded Rose Kata
 
 ## Background
